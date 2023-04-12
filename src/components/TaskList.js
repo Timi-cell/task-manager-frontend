@@ -127,7 +127,7 @@ const TaskList = () => {
       )}
       <hr />
       {isLoading && (
-        <div className="--flex-center">
+        <div className="--flex-center --my">
           <img src={loadingImage} alt="Loading" />
         </div>
       )}
