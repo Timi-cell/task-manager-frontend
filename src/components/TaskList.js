@@ -8,6 +8,7 @@ import loadingImage from "../assets/loader.gif";
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
+  const [isCompleted, setIsCompleted] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [taskID, setTaskID] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -88,8 +89,18 @@ const TaskList = () => {
       completed: true,
     };
     try {
-      await axios.put(`${URL}/api/tasks/${task._id}`, newFormData);
-      getTasks();
+      if (!isCompleted) {
+        await axios.put(`${URL}/api/tasks/${task._id}`, newFormData);
+        getTasks();
+        setIsCompleted(true);
+      } else {
+        await axios.put(`${URL}/api/tasks/${task._id}`, {
+          name: task.name,
+          completed: false,
+        });
+        getTasks();
+        setIsCompleted(false);
+      }
     } catch (error) {
       toast.error(error.message);
     }
