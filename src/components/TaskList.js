@@ -132,7 +132,7 @@ const TaskList = () => {
         </div>
       )}
       {!isLoading && tasks.length === 0 ? (
-        <p className="-py">No task added. Please add a task</p>
+        <p className="-py --my">No task added. Please add a task</p>
       ) : (
         <>
           {tasks.map((task, index) => {
